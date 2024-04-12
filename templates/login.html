@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+         body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            width: 300px;
+        }
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            background-color: #5c67f2;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #4a54e1;
+        }
+        .message {
+            text-align: center;
+            color: red;
+            margin-bottom: 10px;  /* Adds a little space between the message and the form */
+        }
+    </style>
+</head>
+<body>
+    <div style="color: red; ">{{ msg }}</div>
+    <div>
+        <form id="loginForm" action="{{ url_for('login') }}" method="POST">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+
+            <input type="submit" value="Log In">
+        </form>
+    </div>
+    <div>
+        <p id="sql-query">SELECT * FROM Accounts WHERE username = ' ' AND password = ' '</p>
+    </div>
+    
+    
+
+    <script>
+        document.getElementById('username').addEventListener('input', function() {
+            updateSqlQuery();
+        });
+
+        document.getElementById('password').addEventListener('input', function() {
+            updateSqlQuery();
+        });
+
+        function updateSqlQuery() {
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+            document.getElementById('sql-query').textContent = "SELECT * FROM Accounts WHERE username = '" + username + "' AND password = '" + password + "'";
+        }
+    </script>
+    </script>
+</body>
+</html>
